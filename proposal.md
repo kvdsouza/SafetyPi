@@ -12,7 +12,7 @@ Heat Sensor and Running with some Stuff.
 If I finish with this, read weather to screen.
 
 How do we get stuff moving forwards. 
-
+Still in progress - revising this.
 
 
 Here is a suggested outline for your proposal. You don't need to follow this

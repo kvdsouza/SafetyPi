@@ -1,0 +1,54 @@
+{
+    "basic_total": 61.15,
+    "extension_total": 6.55,
+    "basic_original_total": 64.75,
+    "extension_original_total": 6.75,
+    "late_days_total": 8,
+    "bonus": 10,
+    "num_minus": 3,
+    "num_ok": 4,
+    "num_plus": 0,
+    "assign1": {
+        "basic": 10.0,
+        "extension": 4.0,
+        "late_days": 0
+    },
+    "assign2": {
+        "basic": 9.5,
+        "extension": 0.75,
+        "late_days": 2
+    },
+    "assign3": {
+        "basic": 7.65,
+        "extension": 0.0,
+        "late_days": 3,
+        "basic_original": 8.5,
+        "extension_original": 0.0
+    },
+    "assign4": {
+        "basic": 7.875,
+        "extension": 0.0,
+        "late_days": 1,
+        "basic_original": 8.75,
+        "extension_original": 0.0
+    },
+    "assign5": {
+        "basic": 9.25,
+        "extension": 0.0,
+        "late_days": 0
+    },
+    "assign6": {
+        "basic": 7.875,
+        "extension": 1.8,
+        "late_days": 1,
+        "basic_original": 8.75,
+        "extension_original": 2.0
+    },
+    "assign7": {
+        "basic": 9.0,
+        "extension": 0.0,
+        "late_days": 1,
+        "basic_original": 10.0,
+        "extension_original": 0.0
+    }
+}

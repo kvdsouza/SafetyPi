@@ -34,7 +34,7 @@ int calibrate() {
     int totalTemp = 0;
     for (int i = 0; i < 5000; i++) {
         totalTemp += mcp3008_read(0);
-        timer
+        //timer
     }
     int numSamples = i + 1;
 

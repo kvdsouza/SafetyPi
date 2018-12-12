@@ -34,18 +34,21 @@ int calibrate() {
     int totalTemp = 0;
     for (int i = 0; i < 5000; i++) {
         totalTemp += mcp3008_read(0);
-        //timer
+        timer_delay_ms(1);
     }
     int numSamples = i + 1;
+    return totalTemp / numSamples;
+}
 
-
+void setLights(int average, int tempReading) {
+    if (tempReading == )
+}
     // COLLECT FIRST 5 SECONDS AND CALIBRATE.
     // timer delay (secs)
     // read mcp scan and have a counter.
     // divide at the end and get the magic.
+    //return 0;
 
-    return 0;
-}
 
 
     // temp = log(((10240000/RawADC) - 10000));

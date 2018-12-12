@@ -1,6 +1,7 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 #include <math.h>
+#include "gpio.h"
 
 int thermister(int RawADC);
 int calibrate();

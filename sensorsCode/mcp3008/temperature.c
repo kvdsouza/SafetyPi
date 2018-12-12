@@ -32,16 +32,36 @@ int thermister(int RawADC) {
 
 int calibrate() {
     int totalTemp = 0;
-    for (int i = 0; i < 5000; i++) {
+    int numReps = 5000;
+    for (int i = 0; i < numReps; i++) {
         totalTemp += mcp3008_read(0);
         timer_delay_ms(1);
     }
-    int numSamples = i + 1;
-    return totalTemp / numSamples;
+    return totalTemp / numReps;
 }
 
 void setLights(int average, int tempReading) {
-    if (tempReading == )
+    if (tempReading >= average) {
+        gpio_write(GPIO_PIN5, 1);
+        gpio_write(GPIO_PIN6, 0);
+        gpio_write(GPIO_PIN13, 0);
+        gpio_write(GPIO_PIN19, 0);
+    } else if (tempReading <= average && tempReading >= average - 20) {
+        gpio_write(GPIO_PIN5, 1);
+        gpio_write(GPIO_PIN6, 1);
+        gpio_write(GPIO_PIN13, 0);
+        gpio_write(GPIO_PIN19, 0);
+    } else if (tempReading < average - 20 && tempReading >= average - 40) {
+        gpio_write(GPIO_PIN5, 1);
+        gpio_write(GPIO_PIN6, 1);
+        gpio_write(GPIO_PIN13, 1);
+        gpio_write(GPIO_PIN19, 0);
+    } else if (tempReading < average - 40) {
+        gpio_write(GPIO_PIN5, 1);
+        gpio_write(GPIO_PIN6, 1);
+        gpio_write(GPIO_PIN13, 1);
+        gpio_write(GPIO_PIN19, 1);
+    }
 }
     // COLLECT FIRST 5 SECONDS AND CALIBRATE.
     // timer delay (secs)

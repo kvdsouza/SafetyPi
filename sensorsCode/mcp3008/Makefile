@@ -1,10 +1,9 @@
 NAME = main
-MODULES = mcp3008.o
+MODULES = mcp3008.o temperature.o
 
-CS107E= ../../../../cs107e
 CFLAGS = -I$(CS107E)/include -g -Wall -Og -std=c99 -ffreestanding
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
-LDLIBS = -lpiextra -lpi -lgcc
+LDLIBS = -lpiextra -lpi -lm -lgcc -lc
 
 
 all : $(NAME).bin

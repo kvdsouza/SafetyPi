@@ -1,6 +1,6 @@
-The MCP3008 is a 8-channel 10-bit analog to digital converter (ADC). 
+The MCP3008 is a 8-channel 10-bit analog to digital converter (ADC).
 
-See 
+See
 - https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008
 - http://blog.falafel.com/mcp3008-analog-to-digital-conversion
 
@@ -20,5 +20,3 @@ doc/ contains
 - datasheet
 - circuit diagram
 - spi protocol
-
-

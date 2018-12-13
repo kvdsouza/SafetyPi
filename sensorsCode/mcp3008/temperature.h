@@ -6,6 +6,7 @@
 int thermister(int RawADC);
 int calibrate();
 void setLights(int average, int tempReading);
+void broadcastTemp(int average, int tempReading);
 
 
 #endif

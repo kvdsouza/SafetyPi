@@ -19,7 +19,7 @@ int thermister(int RawADC) {
     // temp = temp - 273.15;// Convert Kelvin to Celcius
     // //temp = (temp * 9.0)/ 5.0 + 32.0; // Convert Celcius to Fahrenheit
     //return temp;
-
+    
      double voltage;
      voltage = (RawADC)*(3.3/4095);
      temp = log(10000*(3.3/voltage - 1));
@@ -41,22 +41,22 @@ int calibrate() {
 }
 
 void setLights(int average, int tempReading) {
-    if (tempReading >= average) {
+    if (tempReading >= average - 20) {
         gpio_write(GPIO_PIN5, 1);
         gpio_write(GPIO_PIN6, 0);
         gpio_write(GPIO_PIN13, 0);
         gpio_write(GPIO_PIN19, 0);
-    } else if (tempReading <= average && tempReading >= average - 20) {
+    } else if (tempReading <= average - 20 && tempReading >= average - 40) {
         gpio_write(GPIO_PIN5, 1);
         gpio_write(GPIO_PIN6, 1);
         gpio_write(GPIO_PIN13, 0);
         gpio_write(GPIO_PIN19, 0);
-    } else if (tempReading < average - 20 && tempReading >= average - 40) {
+    } else if (tempReading < average - 40 && tempReading >= average - 60) {
         gpio_write(GPIO_PIN5, 1);
         gpio_write(GPIO_PIN6, 1);
         gpio_write(GPIO_PIN13, 1);
         gpio_write(GPIO_PIN19, 0);
-    } else if (tempReading < average - 40) {
+    } else if (tempReading < average - 60) {
         gpio_write(GPIO_PIN5, 1);
         gpio_write(GPIO_PIN6, 1);
         gpio_write(GPIO_PIN13, 1);
@@ -68,7 +68,24 @@ void setLights(int average, int tempReading) {
     // read mcp scan and have a counter.
     // divide at the end and get the magic.
     //return 0;
-
+void broadcastTemp(int average, int tempReading) {
+    char tempString[4];
+    char *ch = tempString;
+    signed_to_base(ch, 10, tempReading, 10, 0);
+    // so we want a reading for when this happened: stove is safe.
+    if (tempReading >= average - 20) {
+        uart_putchar('a');
+    // we also want a rating for when stove is heating up.
+    } else if (tempReading <= average - 20 && tempReading >= average - 40) {
+        uart_putchar('b');
+    // rating for when stove is hot.
+    } else if (tempReading < average - 40 && tempReading >= average - 60) {
+        uart_putchar('c');
+    // stove supervision is necessary.
+    } else if (tempReading < average - 60) {
+        uart_putchar('d');
+    }
+}
 
 
     // temp = log(((10240000/RawADC) - 10000));

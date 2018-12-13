@@ -4,6 +4,7 @@
 #include "mcp3008.h"
 #include "printf.h"
 #include "temperature.h"
+#include "strings.h"
 //#include "gpioextra.h"
 //#include "temperature.c"
 #include <math.h>       // probs not needed.
@@ -31,10 +32,13 @@ void main(void)
 
     while (1) {
         // read channel 0
+        // uart_flush() potentially?
         printf("my mcp is %d\n", mcp3008_read(0));
-        printf("my thermister is %d\n", thermister(mcp3008_read(0)));
-        printf("my gpio is %d\n", gpio_read(DIGITAL));
+        //printf("my thermister is %d\n", thermister(mcp3008_read(0)));
+        //printf("my gpio is %d\n", gpio_read(DIGITAL));
         setLights(average, mcp3008_read(0));
+        broadcastTemp(average, mcp3008_read(0));
+
         //uart_getLine(); figure out how that goes somewhere.
     }
 }

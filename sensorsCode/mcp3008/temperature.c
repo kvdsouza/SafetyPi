@@ -6,6 +6,8 @@
 #include "printf.h"
 #include "temperature.h"
 #include "timer.h"
+#include <math.h>
+
 
 int thermister(int RawADC) {
     double temp;
@@ -19,14 +21,15 @@ int thermister(int RawADC) {
     // temp = temp - 273.15;// Convert Kelvin to Celcius
     // //temp = (temp * 9.0)/ 5.0 + 32.0; // Convert Celcius to Fahrenheit
     //return temp;
-    
-     double voltage;
-     voltage = (RawADC)*(3.3/4095);
-     temp = log(10000*(3.3/voltage - 1));
-     //Temp = log(((10240000/RawADC) - 10000));
-     temp = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temp * temp ))* temp );
-     temp = temp - 273.15;// Convert Kelvin to Celcius
-     return temp;
+    temp = -51.1*(log(RawADC) / log(2.72)) + 338.54;   // trendline.
+    temp = (temp * 1.8) + 32;     // checker
+    // double voltage;
+    // voltage = (RawADC)*(3.3/4095);
+    // temp = log(10000*(3.3/voltage - 1));
+    //  //Temp = log(((10240000/RawADC) - 10000));
+    // temp = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temp * temp ))* temp );
+    // temp = temp - 273.15;// Convert Kelvin to Celcius
+    return (int)temp;
 }
 
 
@@ -41,22 +44,22 @@ int calibrate() {
 }
 
 void setLights(int average, int tempReading) {
-    if (tempReading >= average - 20) {
+    if (tempReading >= average - 20 || tempReading == 0) {
         gpio_write(GPIO_PIN5, 1);
         gpio_write(GPIO_PIN6, 0);
         gpio_write(GPIO_PIN13, 0);
         gpio_write(GPIO_PIN19, 0);
-    } else if (tempReading <= average - 20 && tempReading >= average - 40) {
+    } else if (tempReading <= average - 20 && tempReading >= average - 40 && tempReading != 0) {
         gpio_write(GPIO_PIN5, 1);
         gpio_write(GPIO_PIN6, 1);
         gpio_write(GPIO_PIN13, 0);
         gpio_write(GPIO_PIN19, 0);
-    } else if (tempReading < average - 40 && tempReading >= average - 60) {
+    } else if (tempReading < average - 40 && tempReading >= average - 60 && tempReading != 0) {
         gpio_write(GPIO_PIN5, 1);
         gpio_write(GPIO_PIN6, 1);
         gpio_write(GPIO_PIN13, 1);
         gpio_write(GPIO_PIN19, 0);
-    } else if (tempReading < average - 60) {
+    } else if (tempReading < average - 60 && tempReading != 0) {
         gpio_write(GPIO_PIN5, 1);
         gpio_write(GPIO_PIN6, 1);
         gpio_write(GPIO_PIN13, 1);

@@ -1,0 +1,4 @@
+your stove is on
+your stove is off
+your stove is safe
+test

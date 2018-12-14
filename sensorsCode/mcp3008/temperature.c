@@ -75,6 +75,7 @@ void broadcastTemp(int average, int tempReading) {
     char tempString[4];
     char *ch = tempString;
     signed_to_base(ch, 10, tempReading, 10, 0);
+    // we could do something with sending that over with char *
     // so we want a reading for when this happened: stove is safe.
     if (tempReading >= average - 20) {
         uart_putchar('a');

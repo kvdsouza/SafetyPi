@@ -36,11 +36,11 @@ void main(void)
     while (1) {
         // read channel 0
         // uart_flush() potentially?
-        printf("my mcp is %d\n", mcp3008_read(0));
-        printf("my thermister is %d\n", thermister(mcp3008_read(0)));
-        printf("my DIGTEMP is %d\n", mcp3008_read(1));
-        // setLights(average, mcp3008_read(0));
-        // broadcastTemp(average, mcp3008_read(0));
+        //printf("my mcp is %d\n", mcp3008_read(0));
+        //printf("my thermister is %d\n", thermister(mcp3008_read(0)));
+        //printf("my DIGTEMP is %d\n", mcp3008_read(1));
+        setLights(average, mcp3008_read(0));
+        broadcastTemp(average, mcp3008_read(0));
 
         //uart_getLine(); figure out how that goes somewhere.
     }

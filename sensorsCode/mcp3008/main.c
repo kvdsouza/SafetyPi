@@ -11,16 +11,19 @@
 
 
 const unsigned int DIGITAL = GPIO_PIN24;
+const unsigned int TEMP2SIGNAL = GPIO_PIN16;
 //const unsigned int LIGHT1 = GPIO_PIN05;
 
 void main(void)
 {
     gpio_init();
-    gpio_set_input(DIGITAL);
+    gpio_set_input(DIGITAL);        // temp sensor 1
+    gpio_set_input(TEMP2SIGNAL);    // DIGITAL TEMP.
     gpio_set_output(GPIO_PIN5);
     gpio_set_output(GPIO_PIN6);
     gpio_set_output(GPIO_PIN13);
     gpio_set_output(GPIO_PIN19);
+
     uart_init();
     mcp3008_init();
     const int average = calibrate();
@@ -35,9 +38,9 @@ void main(void)
         // uart_flush() potentially?
         printf("my mcp is %d\n", mcp3008_read(0));
         printf("my thermister is %d\n", thermister(mcp3008_read(0)));
-        //printf("my gpio is %d\n", gpio_read(DIGITAL));
-        setLights(average, mcp3008_read(0));
-        broadcastTemp(average, mcp3008_read(0));
+        printf("my DIGTEMP is %d\n", mcp3008_read(1));
+        // setLights(average, mcp3008_read(0));
+        // broadcastTemp(average, mcp3008_read(0));
 
         //uart_getLine(); figure out how that goes somewhere.
     }

@@ -7,6 +7,7 @@
 #include "temperature.h"
 #include "timer.h"
 #include <math.h>
+#include "console.h"
 
 
 int thermister(int RawADC) {
@@ -33,9 +34,9 @@ int thermister(int RawADC) {
 }
 
 
-int calibrate() {
+int calibrate(unsigned int mcp) {
     int totalTemp = 0;
-    int numReps = 5000;
+    int numReps = 2000;
     for (int i = 0; i < numReps; i++) {
         totalTemp += mcp3008_read(0);
         timer_delay_ms(1);
@@ -75,7 +76,7 @@ void broadcastTemp(int average, int tempReading) {
     char tempString[4];
     char *ch = tempString;
     signed_to_base(ch, 10, tempReading, 10, 0);
-    printf("%d", tempReading);
+    //printf("%d", tempReading);
     //uart_putchar('\0');
     // we could do something with sending that over with char *
     // so we want a reading for when this happened: stove is safe.

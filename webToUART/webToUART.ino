@@ -24,7 +24,7 @@ QueueList<String> send_q;
 
 const char* ssid = "Stanford Visitor"; // Change this
 const char* password =  "Visitor"; // Change this
-int counter = 0; 
+int counter = 0;
 
 // The server will be at 192.168.4.1
 // and this device will have the IP address 192.168.4.30
@@ -155,50 +155,86 @@ void connect_client() {
 //void getLine(char *buf) {
 //    string line = "";
 //    while (buf[i] != '\n') {
-//      // append. 
+//      // append.
 //    }
 //}
 
 void loop() {
-    counter = counter + 1; 
+    counter = counter + 1;
     String data;
-    String test = "test";
-    WiFiClient client;
+    String website = String("GET /~kvdsouza/cgi-bin/sendMessage.py?message=");
+    String message1 = String("housesafe");
+//    String message1 = String("House is safe. Stove is off. Temp(F) = 72");
+    String message2 = String("Things are warming up. Temp(F) = 80");
+    String message3 = String("It's hot! Temp(F) = 85");
+    String message4 = String ("Heat is back down. You should still check kitchen tho! Temp(F) = 100");
+    String test = String();
+    String printString = String();
+    //char hi = 'a';
+    //String message5 = message4;
+    //message5 += hi;
+    //Serial.println(message5);
 
+    //String num = String("123");
+    //num.toInt();
+    WiFiClient client;
+    // send ASCII's (unsigned to base over on the other side)
+    // send chars over until we get a null Terminator
     if (Serial.available() > 0) {
         Serial.println("serial available");
         char receivedChar = Serial.read();
-        //newLine();
+        if (receivedChar == 'a') {
+          Serial.println("we are here");
+          printString = message1;
+        } else if (receivedChar == 'b') {
+          printString = message2;
+        } else if (receivedChar == 'c') {
+          printString = message3;
+        } else if (receivedChar == 'd') {
+          printString = message4;
+        }
+        // based on this, now turn this into a for loop / if statements.
+        // newLine();
+//        while (receivedChar != 'd') {
+//          printString += receivedChar;
+//          Serial.println(receivedChar);
+//          //Serial.println("we made it");
+//        }
+        // check for the error
+
         Serial.println(receivedChar);
       Serial.println("not connected");
       if (WiFi.status() == WL_CONNECTED) {
           Serial.println("connected");
-          
-          // send information to website. 
+
+          // send information to website.
           if (client.connect("stanford.edu", 80)) {
               Serial.println("connected to Stanford.");
-              client.println("GET /~kvdsouza/cgi-bin/sendMessage.py?message=toohot");
+              test = website + receivedChar;
+              client.println(test);
+              Serial.println(test);
+//              client.println("GET /~kvdsouza/cgi-bin/sendMessage.py?message=toohot");
               client.println();
               //Serial.println("connecting to gettime.py");
               while (!client.available()) {};
               while (client.available()) {
-                  
-                  Serial.println("done");
-//                  // client write
-                  
-                  client.println(receivedChar);
-                  client.println("we are in");
-                  char c = client.read();
-                  Serial.write(c);
-                  client.write(c);
-                  Serial.println("we made it");
+
+//                  Serial.println("done");
+////                  // client write
+//
+//                  client.println(receivedChar);
+//                  client.println("we are in");
+//                  char c = client.read();
+//                  Serial.write(c);
+//                  client.write(c);
+//                  Serial.println("we made it");
               }
               delay(500);
-              // Send information to website. 
+              // Send information to website.
 //              if (counter < 3 || (counter % 10 == 0) ) {
 //                if (client.connect("stanford.edu", 80) ) {
 //                  client.println("POST /~kvdsouza/cgi-bin/testWrite.cgi?message=hello");
-//         
+//
 //                  client.println();
 //                  //Serial.println("connecting to getweather.py");
 //                  while (!client.available()) {};
@@ -213,7 +249,7 @@ void loop() {
 //                  }
 //              }
               }
-            
+
               delay(500);
           }
       } else {

@@ -1,5 +1,5 @@
 NAME = main
-MODULES = mcp3008.o temperature.o
+MODULES = mcp3008.o temperature.o sensors.o
 
 CFLAGS = -I$(CS107E)/include -g -Wall -Og -std=c99 -ffreestanding
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib

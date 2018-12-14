@@ -163,11 +163,11 @@ void loop() {
     counter = counter + 1;
     String data;
     String website = String("GET /~kvdsouza/cgi-bin/sendMessage.py?message=");
-    String message1 = String("housesafe");
-//    String message1 = String("House is safe. Stove is off. Temp(F) = 72");
-    String message2 = String("Things are warming up. Temp(F) = 80");
-    String message3 = String("It's hot! Temp(F) = 85");
-    String message4 = String ("Heat is back down. You should still check kitchen tho! Temp(F) = 100");
+    //String message1 = String("housesafe");
+    String message1 = String("WAYYTOOOHOT!");
+    String message2 = String("warmingup.");
+    String message3 = String("gettingToasty");
+    String message4 = String ("youShouldGoToYourKitchen");
     String test = String();
     String printString = String();
     //char hi = 'a';
@@ -183,16 +183,7 @@ void loop() {
     if (Serial.available() > 0) {
         Serial.println("serial available");
         char receivedChar = Serial.read();
-        if (receivedChar == 'a') {
-          Serial.println("we are here");
-          printString = message1;
-        } else if (receivedChar == 'b') {
-          printString = message2;
-        } else if (receivedChar == 'c') {
-          printString = message3;
-        } else if (receivedChar == 'd') {
-          printString = message4;
-        }
+
         // based on this, now turn this into a for loop / if statements.
         // newLine();
 //        while (receivedChar != 'd') {
@@ -210,10 +201,20 @@ void loop() {
           // send information to website.
           if (client.connect("stanford.edu", 80)) {
               Serial.println("connected to Stanford.");
-              test = website + receivedChar;
+              if (receivedChar == 'a') {
+                  Serial.println("we are here");
+                  printString = message1;
+              } else if (receivedChar == 'b') {
+                  printString = message2;
+              } else if (receivedChar == 'c') {
+                  printString = message3;
+              } else if (receivedChar == 'd') {
+                  printString = message4;
+              }
+              test = website + printString;
               client.println(test);
               Serial.println(test);
-//              client.println("GET /~kvdsouza/cgi-bin/sendMessage.py?message=toohot");
+              //client.println("GET /~kvdsouza/cgi-bin/sendMessage.py?message=WAYYTOOHOTT");
               client.println();
               //Serial.println("connecting to gettime.py");
               while (!client.available()) {};

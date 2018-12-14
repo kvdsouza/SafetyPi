@@ -69,3 +69,5 @@ As a first project, I definitely plan to make improvements on this in the coming
 A big thank you to all TA's, classmates, and peers throughout the quarter. Special acknowledgment to Chris for providing the ESP32 framework and the readMessage, sendMessage logic to begin to communicate over the interface.
 
 ## Thank you.
+
+### - Kyle D'Souza

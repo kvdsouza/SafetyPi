@@ -62,7 +62,7 @@ void main(void)
         broadcastTemp(tempAverage, mcp3008_read(0));
         //printf("\n");
         timer_delay_ms(500);
-        gl_swap_buffer();
+        //gl_swap_buffer();
         console_clear();
 
 

@@ -75,20 +75,21 @@ void broadcastTemp(int average, int tempReading) {
     char tempString[4];
     char *ch = tempString;
     signed_to_base(ch, 10, tempReading, 10, 0);
-    printf("%d\0", tempReading);
+    printf("%d", tempReading);
+    //uart_putchar('\0');
     // we could do something with sending that over with char *
     // so we want a reading for when this happened: stove is safe.
     if (tempReading >= average - 20) {
-        //uart_putchar('a');
+        uart_putchar('a');
     // we also want a rating for when stove is heating up.
     } else if (tempReading <= average - 20 && tempReading >= average - 40) {
-        //uart_putchar('b');
+        uart_putchar('b');
     // rating for when stove is hot.
     } else if (tempReading < average - 40 && tempReading >= average - 60) {
-        //uart_putchar('c');
+        uart_putchar('c');
     // stove supervision is necessary.
     } else if (tempReading < average - 60) {
-        //uart_putchar('d');
+        uart_putchar('d');
     }
 }
 

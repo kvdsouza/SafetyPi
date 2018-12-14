@@ -8,11 +8,13 @@
 //#include "gpioextra.h"
 //#include "temperature.c"
 #include <math.h>       // probs not needed.
+#include "timer.h"
 
 
 const unsigned int DIGITAL = GPIO_PIN24;
 const unsigned int TEMP2SIGNAL = GPIO_PIN16;
 //const unsigned int LIGHT1 = GPIO_PIN05;
+volatile unsigned int tracker = 0;
 
 void main(void)
 {
@@ -36,12 +38,12 @@ void main(void)
     while (1) {
         // read channel 0
         // uart_flush() potentially?
-        //printf("my mcp is %d\n", mcp3008_read(0));
-        //printf("my thermister is %d\n", thermister(mcp3008_read(0)));
-        //printf("my DIGTEMP is %d\n", mcp3008_read(1));
+        // printf("my mcp is %d\n", mcp3008_read(0));
+        // printf("my thermister is %d\n", thermister(mcp3008_read(0)));
+        // printf("my DIGTEMP is %d\n", mcp3008_read(1));
         setLights(average, mcp3008_read(0));
-        broadcastTemp(average, mcp3008_read(0));
-
+        broadcastTemp(average, thermister(mcp3008_read(0)));
+        timer_delay_ms(250);
         //uart_getLine(); figure out how that goes somewhere.
     }
 }

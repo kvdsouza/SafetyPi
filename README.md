@@ -59,6 +59,7 @@ The project's technical workflow can be best explained below:
 	 - This is incredibly cool, because of the potential to essentially print information from a Raspberry Pi to a website. Thus, thanks to the WEBtoUART file configured with ESP32 on Arduino, we can now have another printf, except not on console but rather on a website.
  - Debugging takes much longer on Arduino IDE and getting used to a new interface definitely took its time; however, it was a great experience diving into something new.
  - Design process was often SNAFU-filled - wanted to break things into smaller chunks but you can never go to small. (i.e. temperature sensor was a little funky on the edges, both required regression calibration and also wasn't often detecting very well).
+ - The ability to print to a website using a GET Request because of the limitations of ESP32 was I think a very fascinating way to get around a technical limitation to achieve the desired effect. Now, it would be super cool if I could somehow credentialize accessing the website (to prevent a malicious actor from generating a fake output).
 
 
 # Future

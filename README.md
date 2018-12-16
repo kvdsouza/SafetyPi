@@ -9,7 +9,7 @@ Safety-Pi is a tool designed to keep your home and family safe, as well as keep 
 
  2. *Website interface so one can view and detect any changes in their kitchen/stove area*
 
- The project is at a point where there are many exciting extensions that can take this work to the next step.
+ The project is at a point where there are many exciting extensions that can take this work to the next step. Particularly, I am really encouraged by the new technical feature to write messages from a Pi to a website: *this provides an exciting ability to remotely access and read information submitted from a Pi, even from across the world!*
 
 # Motivation / Problem Statement
 
@@ -55,7 +55,8 @@ The project's technical workflow can be best explained below:
 ## Technical Challenges and Solutions
 
  - How do you communicate over from one side to another?
-	 - spent a long time (20+ hours working with ESP32 and figuring out many of the kinks). While I may not have figured it out fully in time for final presentation, I know I'm absolutely very close to getting a solid solution to have more robust printf interfacing to a website. Key issues here are synchronicity and keeping track of data and memory as it goes from device to device.
+	 - spent a long time (30+ hours working with ESP32 and figuring out many of the kinks). While I may not have figured it out fully in time for final presentation, I know I'm absolutely very close to getting a solid solution to have more robust printf interfacing to a website. Key issues here are synchronicity and keeping track of data and memory as it goes from device to device.
+	 - This is incredibly cool, because of the potential to essentially print information from a Raspberry Pi to a website. Thus, thanks to the WEBtoUART file configured with ESP32 on Arduino, we can now have another printf, except not on console but rather on a website.
  - Debugging takes much longer on Arduino IDE and getting used to a new interface definitely took its time; however, it was a great experience diving into something new.
  - Design process was often SNAFU-filled - wanted to break things into smaller chunks but you can never go to small. (i.e. temperature sensor was a little funky on the edges, both required regression calibration and also wasn't often detecting very well).
 
@@ -71,3 +72,4 @@ A big thank you to all TA's, classmates, and peers throughout the quarter. Speci
 ## Thank you.
 
 ### - Kyle D'Souza
+
